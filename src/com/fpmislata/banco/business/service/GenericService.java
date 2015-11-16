@@ -5,13 +5,13 @@ import java.util.List;
 /**
  *
  * @author Samuel Lao
- * @param <EB>
+ * @param <S>
  */
-public interface GenericService <EB> {
+public interface GenericService <S> {
     
-    EB get (int id);
-    EB insert (EB eb);
-    EB update (EB eb);
+    S get (int id);
+    S insert (S s);
+    S update (S s);
     boolean delete (int id);
-    List<EB> findAll();
+    List<S> findAll();
 }

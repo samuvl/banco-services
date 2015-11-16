@@ -46,3 +46,17 @@ CREATE TABLE `sucursalbancaria` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
+
+
+CREATE TABLE `usuario` (
+	`idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
+	`nombre` VARCHAR(50) NULL DEFAULT NULL,
+	`encryptedPassword` VARCHAR(50) NULL DEFAULT NULL,
+	`rol` VARCHAR(20) NULL DEFAULT NULL,
+	`nick` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`idUsuario`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
