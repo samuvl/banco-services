@@ -1,4 +1,4 @@
-package com.fpmislata.banco.persistence.dao.Impl.jdbc;
+/*package com.fpmislata.banco.persistence.dao.Impl.jdbc;
 
 import com.fpmislata.banco.business.domain.Usuario;
 import com.fpmislata.banco.persistence.dao.UsuarioDAO;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author samu_
- */
+ *//*
 public class UsuarioDAOImplJDBC implements UsuarioDAO {
 
     @Autowired
@@ -192,3 +192,4 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
         return usuarios;
     }
 }
+*/

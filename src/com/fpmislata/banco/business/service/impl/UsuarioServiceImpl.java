@@ -1,4 +1,4 @@
-package com.fpmislata.banco.business.service.impl;
+/*package com.fpmislata.banco.business.service.impl;
 
 import com.fpmislata.banco.business.domain.Usuario;
 import com.fpmislata.banco.business.service.UsuarioService;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author samu_
- */
+ *//*
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
@@ -45,3 +45,4 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioDAO.findByNombre(nombre);
     }
 }
+*/
