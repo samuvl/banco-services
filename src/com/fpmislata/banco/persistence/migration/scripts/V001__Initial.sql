@@ -48,7 +48,7 @@ ENGINE=InnoDB
 ;
 
 
-/*
+
 CREATE TABLE `usuario` (
 	`idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(50) NULL DEFAULT NULL,
@@ -60,4 +60,3 @@ CREATE TABLE `usuario` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
-*/
