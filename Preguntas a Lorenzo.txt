@@ -1,0 +1,51 @@
+[x] No se debe inicializar las variables al declararlas
+------------------------( Entonces me dice deference possible null)
+
+					se ha olvidado en algun else  igualizarlo a null  ej: else{ usuario=null }					
+
+[x] Dejar mensajes de System.out.println en vez de usar el log
+------------------------( QUE? )
+
+					quitar sout de todos los sitioos de las excepciones.
+					dejar el logger en la excepcion, inicializarla fuera si se quiere al principio de la clase. y en el catch :: logger.log(Level.SEVERE, "No existe 
+					websession");					
+					Siempre poner: 
+					if ( logger.getLevel() == Level.FINE)  { logger.log(Level.FINE, "No existe websession"); }
+						SIN ELSE.
+
+[x] El paquete "security" está en un mal sitio
+
+------------------------(Donde entonces????)????
+seguridad al mismo nivel de persistencia.
+
+
+
+
+
+[x] No retornar correctamente la excepción en el controlador
+------------------------(Comentado)???
+throw new;
+
+
+------------------------[x] No retornar el estado Http 
+------------------------(Comentado)???
+set status. SC_OK
+
+
+
+[x] No retornar por Http lo que retornan los métodos insert o update
+	
+------------------------( ¿En update o INSERT no devolver el JSON ?)
+en alguno falta retornarlo.
+
+
+
+
+
+*/*////*/*//*/*//*/*/*///*/*/**/*//**//*/*/*/*/*/*//*/*/*/**
+FILTRO SEGURIDAD
+PONER ELSE  para el primer if:
+else{
+	usuario = null;
+	y log cuando no hay sesion, osea aqui.
+}
