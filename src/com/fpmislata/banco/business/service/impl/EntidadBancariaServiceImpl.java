@@ -25,13 +25,13 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
 
     @Override
     public EntidadBancaria insert(EntidadBancaria eb) {
-        try {
+        /*try {
             if (eb.codigoEntidad == 0) {
                 throw new BusinessException("codigoEntidad", "El codigo de entidad Ha fallado.");
             }
         } catch (BusinessException ex) {
             throw new RuntimeException(ex);
-        }
+        }*/
 
         return entidadBancariaDAO.insert(eb);
 
