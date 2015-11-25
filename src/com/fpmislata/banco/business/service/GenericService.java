@@ -1,5 +1,6 @@
 package com.fpmislata.banco.business.service;
 
+import com.fpmislata.banco.core.BusinessException;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
 public interface GenericService <S> {
     
     S get (int id);
-    S insert (S s);
+    S insert (S s) throws BusinessException;
     S update (S s);
     boolean delete (int id);
     List<S> findAll();

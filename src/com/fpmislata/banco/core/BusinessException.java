@@ -13,8 +13,13 @@ public class BusinessException extends Exception {
     private String mensaje;
 
     public BusinessException(String fieldName, String mensaje) {
-        this.fieldName = fieldName;
-        this.mensaje = mensaje;
+        BusinessMessage businessMessage = new BusinessMessage(fieldName, mensaje);
+        this.businessMessages.add(businessMessage);
+    }
+    
+    public BusinessException(List<BusinessMessage> businessMessages){
+        
+        this.businessMessages = businessMessages;
     }
 
     public List<BusinessMessage> getBusinessMessages() {
@@ -24,23 +29,6 @@ public class BusinessException extends Exception {
     public void setBusinessMessages(List<BusinessMessage> businessMessages) {
         this.businessMessages = businessMessages;
     }
-
-    public String getPropiedad() {
-        return fieldName;
-    }
-
-    public void setPropiedad(String propiedad) {
-        this.fieldName = propiedad;
-    }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-    
     
     
 }
