@@ -2,7 +2,10 @@ package com.fpmislata.banco.persistence.dao.impl.jdbc;
 
 import com.fpmislata.banco.persistence.jdbc.ConnectionFactory;
 import com.fpmislata.banco.business.domain.EntidadBancaria;
+import com.fpmislata.banco.core.BusinessException;
+import com.fpmislata.banco.core.BusinessMessage;
 import com.fpmislata.banco.persistence.dao.EntidadBancariaDAO;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -50,8 +55,14 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
         return entidadBancaria;
     }
 
+    /**
+     *
+     * @param entidadBancaria
+     * @return
+     * @throws BusinessException
+     */
     @Override
-    public EntidadBancaria insert(EntidadBancaria entidadBancaria) {
+    public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException{
         EntidadBancaria entidadBancariaDevolver;
         Connection conexion = connectionFactory.getConnection();
 
@@ -78,7 +89,19 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             connectionFactory.close(conexion);
 
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            entidadBancariaDevolver = null;
+            if (ex.getErrorCode() == 1062 && ex.getSQLState().equals("23000")) {
+                List<BusinessMessage> businessMessages = new ArrayList<>();
+
+                BusinessMessage businessMessage = new BusinessMessage("codigoEntidad: ", "Ya existe.");
+                businessMessages.add(businessMessage);
+
+                throw new BusinessException(businessMessages);
+
+            } else {
+                throw new RuntimeException(ex);
+                
+            }
         }
         return entidadBancariaDevolver;
     }
@@ -88,7 +111,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
         EntidadBancaria entidadBancariaDevolver;
         try {
             Connection conexion = connectionFactory.getConnection();
-            
+
             String query = "UPDATE EntidadBancaria SET nombre = ?, codigoEntidad = ?, fechaCreacion = ?, direccion = ?, CIF = ? WHERE idEntidadBancaria = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(query);
             preparedStatement.setString(1, entidadBancaria.getNombre());
@@ -117,7 +140,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
     @Override
     public boolean delete(int idEntidadBancaria) {
         boolean exito = false;
-        try { 
+        try {
             Connection conexion = connectionFactory.getConnection();
 
             String query = "DELETE FROM EntidadBancaria WHERE idEntidadBancaria = ?";
@@ -174,7 +197,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
 
         try {
-           Connection conexion = connectionFactory.getConnection();
+            Connection conexion = connectionFactory.getConnection();
             String query = "SELECT * FROM EntidadBancaria where nombre = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(query);
             preparedStatement.setString(1, nombre);

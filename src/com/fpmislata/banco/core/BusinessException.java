@@ -18,7 +18,6 @@ public class BusinessException extends Exception {
     }
     
     public BusinessException(List<BusinessMessage> businessMessages){
-        
         this.businessMessages = businessMessages;
     }
 
