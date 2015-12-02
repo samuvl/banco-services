@@ -1,7 +1,3 @@
-[x] No se debe inicializar las variables al declararlas
-------------------------( Entonces me dice deference possible null)
-
-					se ha olvidado en algun else  igualizarlo a null  ej: else{ usuario=null }					
 
 [x] Dejar mensajes de System.out.println en vez de usar el log
 ------------------------( QUE? )
@@ -13,11 +9,17 @@
 					if ( logger.getLevel() == Level.FINE)  { logger.log(Level.FINE, "No existe websession"); }
 						SIN ELSE.
 
+
+**-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-
 [x] El paquete "security" está en un mal sitio
 
 ------------------------(Donde entonces????)????
 seguridad al mismo nivel de persistencia.
 
+[x] No se debe inicializar las variables al declararlas
+------------------------( Entonces me dice deference possible null)
+
+					se ha olvidado en algun else  igualizarlo a null  ej: else{ usuario=null }					
 
 
 
@@ -39,9 +41,6 @@ set status. SC_OK
 en alguno falta retornarlo.
 
 
-
-
-
 */*////*/*//*/*//*/*/*///*/*/**/*//**//*/*/*/*/*/*//*/*/*/**
 FILTRO SEGURIDAD
 PONER ELSE  para el primer if:
@@ -49,3 +48,16 @@ else{
 	usuario = null;
 	y log cuando no hay sesion, osea aqui.
 }
+
+
+
+*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-
+
+
+
+
+cambiar el codigoEntidad a unique
+En el tryCatch de cada metodo del dao hay que sacar el codigo de error
+que devuelve la sqlException y según sea el codigo de error, devolver
+un mensaje diferente en una bussinesException que luego muestras en la web
+como mensaje(alert o lo que sea)

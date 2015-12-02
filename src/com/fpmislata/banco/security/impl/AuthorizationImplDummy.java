@@ -1,8 +1,7 @@
-package com.fpmislata.banco.persistence.security.impl;
+package com.fpmislata.banco.security.impl;
 
-import com.fpmislata.banco.business.domain.Rol;
 import com.fpmislata.banco.business.domain.Usuario;
-import com.fpmislata.banco.persistence.security.Authorization;
+import com.fpmislata.banco.security.Authorization;
 
 /**
  *
@@ -14,15 +13,15 @@ public class AuthorizationImplDummy implements Authorization {
     public boolean isAuthorizedURL(Usuario usuario, String url, String metodo) {
         /*usuario.getRol().equals(Rol.Administrador*/
         boolean isAuthorized;
-        
+
         if (url.equalsIgnoreCase("/banco-api/api/login")) {
             isAuthorized = true;
+        } else if (usuario != null) {
+            isAuthorized = true;
+        } else if (usuario == null) {
+            isAuthorized = false;
         } else {
-            if (usuario != null) {
-                isAuthorized = true;
-            } else {
-                isAuthorized = false;
-            }
+            isAuthorized = false;
         }
         return isAuthorized;
     }

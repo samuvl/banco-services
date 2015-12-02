@@ -1,4 +1,4 @@
-package com.fpmislata.banco.persistence.security;
+package com.fpmislata.banco.security;
 
 /**
  *

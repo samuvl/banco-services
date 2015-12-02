@@ -1,6 +1,6 @@
-package com.fpmislata.banco.persistence.security.impl;
+package com.fpmislata.banco.security.impl;
 
-import com.fpmislata.banco.persistence.security.PasswordManager;
+import com.fpmislata.banco.security.PasswordManager;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 
 /**

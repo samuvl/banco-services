@@ -11,7 +11,7 @@
     <bean class="com.fpmislata.banco.persistence.jdbc.impl.ConnectionFactoryImplDataSource" />
     <bean class="com.fpmislata.banco.persistence.jdbc.impl.DatasourceFactoryImpl" />
     <bean class="com.fpmislata.banco.persistence.migration.impl.DatabaseMigrationImplFlyway" />
-    <bean class="com.fpmislata.banco.persistence.security.impl.PasswordManagerImplJasypt" />
-    <bean class="com.fpmislata.banco.persistence.security.impl.AuthorizationImplDummy" />
+    <bean class="com.fpmislata.banco.security.impl.PasswordManagerImplJasypt" />
+    <bean class="com.fpmislata.banco.security.impl.AuthorizationImplDummy" />
 
 </beans>

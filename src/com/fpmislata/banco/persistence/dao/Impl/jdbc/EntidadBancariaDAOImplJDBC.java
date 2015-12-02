@@ -24,8 +24,9 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
     @Override
     public EntidadBancaria get(int idEntidadBancaria) {
         EntidadBancaria entidadBancaria;
-        Connection conexion = connectionFactory.getConnection();
         try {
+            Connection conexion = connectionFactory.getConnection();
+
             String query = "SELECT * FROM EntidadBancaria WHERE idEntidadBancaria = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(query);
             preparedStatement.setInt(1, idEntidadBancaria);
@@ -51,10 +52,12 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
 
     @Override
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) {
-        int id = 0;
-        EntidadBancaria entidadBancariaDevolver = null;
+        EntidadBancaria entidadBancariaDevolver;
         Connection conexion = connectionFactory.getConnection();
+
         try {
+            int id;
+
             String query = "INSERT INTO EntidadBancaria (nombre, codigoEntidad, fechaCreacion, direccion, CIF) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, entidadBancaria.getNombre());
@@ -67,22 +70,25 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
                 id = rs.getInt(1);
+                entidadBancariaDevolver = this.get(id);
+            } else {
+                throw new RuntimeException("No se ha insertado ninguna Entidad");
             }
 
-            entidadBancariaDevolver = this.get(id);
             connectionFactory.close(conexion);
 
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            throw new RuntimeException(ex);
         }
         return entidadBancariaDevolver;
     }
 
     @Override
     public EntidadBancaria update(EntidadBancaria entidadBancaria) {
-        EntidadBancaria entidadBancariaDevolver = null;
-        Connection conexion = connectionFactory.getConnection();
+        EntidadBancaria entidadBancariaDevolver;
         try {
+            Connection conexion = connectionFactory.getConnection();
+            
             String query = "UPDATE EntidadBancaria SET nombre = ?, codigoEntidad = ?, fechaCreacion = ?, direccion = ?, CIF = ? WHERE idEntidadBancaria = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(query);
             preparedStatement.setString(1, entidadBancaria.getNombre());
@@ -98,12 +104,12 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             } else if (filasActualizadas == 0) {
                 throw new RuntimeException("No se ha actualizado ninguna fila: " + filasActualizadas);
             } else {
-                throw new RuntimeException("Soy un paranoico" + filasActualizadas);
+                throw new RuntimeException("Soy un paranoico; Filas actualizadas: " + filasActualizadas);
             }
             connectionFactory.close(conexion);
 
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            throw new RuntimeException(ex);
         }
         return entidadBancariaDevolver;
     }
@@ -111,8 +117,9 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
     @Override
     public boolean delete(int idEntidadBancaria) {
         boolean exito = false;
-        Connection conexion = connectionFactory.getConnection();
-        try {
+        try { 
+            Connection conexion = connectionFactory.getConnection();
+
             String query = "DELETE FROM EntidadBancaria WHERE idEntidadBancaria = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(query);
             preparedStatement.setInt(1, idEntidadBancaria);
@@ -129,7 +136,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             }
             connectionFactory.close(conexion);
         } catch (SQLException ex) {
-            throw new RuntimeException(ex.getMessage());
+            throw new RuntimeException(ex);
         }
         return exito;
     }
@@ -137,9 +144,9 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
     @Override
     public List<EntidadBancaria> findAll() {
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
-        Connection conexion = connectionFactory.getConnection();
 
         try {
+            Connection conexion = connectionFactory.getConnection();
             String query = "SELECT * FROM EntidadBancaria";
             PreparedStatement preparedStatement = conexion.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -156,7 +163,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             connectionFactory.close(conexion);
 
         } catch (Exception ex) {
-            throw new RuntimeException(ex.getMessage());
+            throw new RuntimeException(ex);
         }
         return entidadesBancarias;
 
@@ -165,9 +172,9 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
     @Override
     public List<EntidadBancaria> findByNombre(String nombre) {
         List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
-        Connection conexion = connectionFactory.getConnection();
 
         try {
+           Connection conexion = connectionFactory.getConnection();
             String query = "SELECT * FROM EntidadBancaria where nombre = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(query);
             preparedStatement.setString(1, nombre);
@@ -183,7 +190,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             }
             connectionFactory.close(conexion);
         } catch (SQLException ex) {
-            throw new RuntimeException(ex.getMessage());
+            throw new RuntimeException(ex);
 
         }
         return entidadesBancarias;
