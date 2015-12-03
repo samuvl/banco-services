@@ -12,7 +12,7 @@ public interface GenericService <S> {
     
     S get (int id);
     S insert (S s) throws BusinessException;
-    S update (S s);
+    S update (S s) throws BusinessException;
     boolean delete (int id);
     List<S> findAll();
 }

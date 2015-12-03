@@ -92,22 +92,25 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             entidadBancariaDevolver = null;
             if (ex.getErrorCode() == 1062 && ex.getSQLState().equals("23000")) {
                 List<BusinessMessage> businessMessages = new ArrayList<>();
-
-                BusinessMessage businessMessage = new BusinessMessage("codigoEntidad: ", "Ya existe.");
+                BusinessMessage businessMessage = new BusinessMessage("CodigoEntidad: ", "Ya existe.");
                 businessMessages.add(businessMessage);
 
                 throw new BusinessException(businessMessages);
-
             } else {
                 throw new RuntimeException(ex);
-                
             }
         }
         return entidadBancariaDevolver;
     }
 
+    /**
+     *
+     * @param entidadBancaria
+     * @return
+     * @throws BusinessException
+     */
     @Override
-    public EntidadBancaria update(EntidadBancaria entidadBancaria) {
+    public EntidadBancaria update(EntidadBancaria entidadBancaria) throws BusinessException {
         EntidadBancaria entidadBancariaDevolver;
         try {
             Connection conexion = connectionFactory.getConnection();
@@ -132,7 +135,15 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             connectionFactory.close(conexion);
 
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            if (ex.getErrorCode() == 1062 && ex.getSQLState().equals("23000")) {
+                List<BusinessMessage> businessMessages = new ArrayList<>();
+                BusinessMessage businessMessage = new BusinessMessage("CodigoEntidad: ", "Ya existe.");
+                businessMessages.add(businessMessage);
+
+                throw new BusinessException(businessMessages);
+            } else {
+                throw new RuntimeException(ex);
+            }
         }
         return entidadBancariaDevolver;
     }

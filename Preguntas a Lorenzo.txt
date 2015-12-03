@@ -10,6 +10,19 @@
 						SIN ELSE.
 
 
+
+
+
+
+
+cambiar el codigoEntidad a unique
+
+En el tryCatch de cada metodo del dao hay que sacar el codigo de error que devuelve la sqlException y según sea el codigo de error, 
+
+devolver un mensaje diferente en una bussinesException que luego muestras en la web como mensaje(alert o lo que sea)
+
+
+
 **-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-
 [x] El paquete "security" está en un mal sitio
 
@@ -53,11 +66,3 @@ else{
 
 *-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-*-*-**--*-*-*-*-***-*-*-*-*-
 
-
-
-
-cambiar el codigoEntidad a unique
-En el tryCatch de cada metodo del dao hay que sacar el codigo de error
-que devuelve la sqlException y según sea el codigo de error, devolver
-un mensaje diferente en una bussinesException que luego muestras en la web
-como mensaje(alert o lo que sea)
